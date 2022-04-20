@@ -25,14 +25,14 @@ namespace TesteLogin.Pages.Account
             //Verify the credential
             if(Credential.UserName == "admin" && Credential.Password == "1234")
             {
-                //Creating the security context
+                //Creating the security context`
                 var claims = new List<Claim> {
                     new Claim(ClaimTypes.Name, "admin"),
                     new Claim(ClaimTypes.Email, "admin@mywebsite.com"),
                     new Claim("Department", "HR"),
                     new Claim("Admin", "true"),
                     new Claim("Manager", "true"),
-                    new Claim("EmploymentDate", "12/04/2022")
+                    new Claim("EmploymentDate", "01/01/2022")
                 };
                 var identity = new ClaimsIdentity(claims, "MyCookieAuth");
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);

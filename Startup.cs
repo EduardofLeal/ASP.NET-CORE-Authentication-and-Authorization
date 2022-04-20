@@ -26,12 +26,12 @@ namespace TesteLogin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options => 
+            services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options =>
             {
                 options.Cookie.Name = "MyCookieAuth";
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(20);
+                //options.ExpireTimeSpan = TimeSpan.FromSeconds(20);
             });
 
             services.AddAuthorization(options =>
@@ -48,13 +48,18 @@ namespace TesteLogin
                    .Requirements.Add(new HRManagerProbationRequirement(3));
                 });
 
-                options.AddPolicy("MustBelongToHRDepartment", policy => 
+                options.AddPolicy("MustBelongToHRDepartment", policy =>
                 policy.RequireClaim("Department", "HR"));
             });
-
+            
             services.AddSingleton<IAuthorizationHandler, HRManagerProbationRequirementHandler>();
 
             services.AddRazorPages();
+
+            services.AddHttpClient("OurWebAPI", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44377/");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
