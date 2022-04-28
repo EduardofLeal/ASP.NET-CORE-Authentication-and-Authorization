@@ -58,7 +58,13 @@ namespace TesteLogin
 
             services.AddHttpClient("OurWebAPI", client =>
             {
-                client.BaseAddress = new Uri("https://localhost:44377/");
+                client.BaseAddress = new Uri("https://localhost:44339/");
+            });
+
+            services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.IdleTimeout = TimeSpan.FromHours(8);
             });
         }
 
@@ -83,6 +89,8 @@ namespace TesteLogin
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

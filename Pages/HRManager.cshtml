@@ -17,14 +17,13 @@
         <tbody>
             @foreach (var item in Model.WeatherForecastItems)
             {
-            <tr>
-                <td>@item.Date</td>
-                <td>@item.TemperatureC</td>
-                <td>@item.TemperatureF</td>
-                <td>@item.Summary</td>
-            </tr>
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.TemperatureC</td>
+                    <td>@item.TemperatureF</td>
+                    <td>@item.Summary</td>
+                </tr>
             }
         </tbody>
     </table>
-
 </div>
